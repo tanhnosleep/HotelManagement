@@ -29,7 +29,7 @@
   <!-- navleft -->
   <div class="navleft" th:fragment="fragmentNavLeft">
     <div style="padding-top: 1rem;" class="logo">
-      <img class="logo" th:src="@{/images/logo.png}">
+      <img class="logo" th:src="@{/images/logo.jpg}">
     </div>
     <div class="menu text-white text-1">
       <div id="nav-home" class="nav-item nav-item-parent">
@@ -65,22 +65,80 @@
 
   </div>
   <!-- content -->
-  <div class="content"  style="color: white;font-size: xx-large;text-align: center;display: inline-block;background-image: url('https://c.wallhere.com/photos/ec/f9/hotel.jpg!d');background-size: cover ">
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <p>
 
-      Khách sạn Amumu tọa lạc gần Quảng trường Pitover- . Nằm giữa trung tâm kinh tế và văn hóa của Pitover, Khách sạn Amumu mong muốn là cánh cửa đầu tiên ở Pitover chào đón Quý khách ở khắp mọi miền League Of Legends về với Pitover.
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/hotel.jpg}">
+    </div>
 
-      Với chất lượng đạt chuẩn Quốc tế 4 sao,  Khách sạn Amumu không chỉ đáp ứng hoàn hảo nhu cầu nghỉ ngơi của Quý khách mà còn mang đến những giây phút thư giãn giải trí tuyệt vời và để lại dư vị ấn tượng trong văn hóa ẩm thực nơi đây. Khách sạn là sự kết hợp hài hòa của phong cách mang màu sắc sang trọng, hiện đại và cổ kính bao gồm cả quần thể Nhà hàng, Bể Bơi, sân Tennis và các khu vui chơi giải trí khác được quy tụ trong một khuôn viên rộng lớn gần 15.000 m2 . </p>
-    <br/>
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/pool.jpg}">
+    </div>
 
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/room_vip.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/room_custom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/restaurant.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/laundryroom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/sparoom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/saunaroom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/karaokeroom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/pubroom.jpg}">
+    </div>
+
+    <div class="mySlides fade">
+      <img style="display: block; margin-top: auto; width: 1250px; height: 700px;" th:src="@{/images/arcaderoom.jpg}">
+    </div>
   </div>
+
+
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+
 
 </div>
 
 </body>
+<script>
+  var slideIndex = 0;
+  showSlides(slideIndex);
+  function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      if (n > slides.length - 1) {slideIndex = 0}
+      if (n < 0) {slideIndex = slides.length - 1}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      slides[slideIndex].style.display = "block";
+      setTimeout(showSlides, 500);
+  }
+  function plusSlides(n) {
+      showSlides(slideIndex += n);
+  }
+
+</script>
 
 </html>
