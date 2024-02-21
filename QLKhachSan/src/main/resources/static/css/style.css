@@ -125,7 +125,7 @@
 .nav-item {
     display: flex;
     align-items: center;
-    padding: 1.5rem 1rem;
+    padding:  1rem;
     cursor: pointer;
 }
 
@@ -135,8 +135,9 @@
     bottom: 1rem;
     display: flex;
     align-items: center;
-    padding: 1.5rem 1rem;
+    padding: 1rem;
     cursor: pointer;
+    bottom: 0;
 }
 
 .nav-item:hover {
@@ -284,9 +285,11 @@ img {
 
 /* Slideshow container */
 .slideshow-container {
-  max-width: 50%;
+  max-width: 80%;
   position: relative;
-  margin-top: 6%;
+  margin-top: 6rem;
+    max-height: calc(100vh - 6rem);
+    overflow: hidden;
 }
 
 /* Hide slides by default */

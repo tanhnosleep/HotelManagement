@@ -31,7 +31,7 @@ public class HomeController {
             User loginUser = (User) ((Authentication)principal).getPrincipal();
             String userInfor = WebUtils.toString(loginUser);
             model.addAttribute("userInfor", userInfor);
-            String message = "Xin chào " + principal.getName() + ". Bạn không có quyền truy cập vào trang web này";
+            String message = "Xin chào " + principal.getName() + ". Bạn không có quyền truy cập vào chức năng này";
             model.addAttribute("message", message);
             message = principal.getName() ;
             model.addAttribute("message1", message);

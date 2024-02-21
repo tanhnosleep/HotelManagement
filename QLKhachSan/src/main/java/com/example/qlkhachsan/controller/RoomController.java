@@ -95,9 +95,16 @@ public class RoomController {
         return "redirect:/quanlyphong";
     }
     @GetMapping("/delete/{id}")
-    public  String deleteRoom(@PathVariable(name = "id") Long id) {
-        repo.deleteById(id);
-        return "redirect:/quanlyphong";
+    public  String deleteRoom(Model model,@PathVariable(name = "id") Long id) {
+        try{
+            repo.deleteById(id);
+            return "redirect:/quanlyphong";
+        }catch (Exception e){
+            String message = "Phòng đang được sử dụng" ;
+            model.addAttribute("message", message);
+            return "403Page";
+        }
+
     }
 
 

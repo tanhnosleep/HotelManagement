@@ -86,8 +86,15 @@ public class ManageGuestController {
         return "redirect:/khachhang";
     }
     @GetMapping("/delete/{id}")
-    public  String deleteGuest(@PathVariable(name = "id") Long id) {
-        repo.deleteById(id);
-        return "redirect:/khachhang";
+    public  String deleteGuest(Model model,@PathVariable(name = "id") Long id) {
+
+        try{
+            repo.deleteById(id);
+            return "redirect:/khachhang";
+        }catch (Exception e){
+            String message = "Khách hàng đang thuê phòng" ;
+            model.addAttribute("message", message);
+            return "403Page";
+        }
     }
 }
