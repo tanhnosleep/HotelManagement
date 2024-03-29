@@ -16,7 +16,15 @@ import java.util.List;
 @Transactional
 public interface GuestRepository extends JpaRepository<Guest,Long> {
 
-    @Modifying
-    @Query(value = "select * from guest  where guest_name = :guest_name",nativeQuery = true)
-    Guest findByGuestName(@Param("guest_name") String guest_name);
+    @Query(value = "SELECT * FROM guest",nativeQuery = true)
+    List<Guest> showListGuest();
+
+//    @Modifying
+//    @Query(value = "INSERT INTO guest (guest_id,guest_name,birth,id_card,address,phone_number,email) " +
+//            "VALUES (:guest_id,:guest_name,:birth,:id_card,:address,:phone_number,:email)",nativeQuery = true)
+//    void addGuest(@Param("guest_id") Long guestId, @Param("guest_name") String guestName,
+//                  @Param("birth") String birth, @Param("id_card") String idCard, @Param("address") String address,
+//                  @Param("phone_number") String phoneNumber, @Param("email") String email);
+
+
 }

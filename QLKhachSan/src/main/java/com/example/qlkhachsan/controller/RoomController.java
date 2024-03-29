@@ -3,6 +3,7 @@ package com.example.qlkhachsan.controller;
 
 import com.example.qlkhachsan.Repository.RoomRepository;
 import com.example.qlkhachsan.model.Room;
+import com.example.qlkhachsan.service.RoomService;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -24,38 +22,62 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/quanlyphong")
-@AllArgsConstructor
+//@AllArgsConstructor
 
 public class RoomController {
+//    @Autowired
+//    private RoomRepository repo;
     @Autowired
-    private RoomRepository repo;
+    private final RoomService roomService;
 
+    public RoomController(RoomService roomService){
+        this.roomService=roomService;
+    }
+
+//    @GetMapping
+//    public String showListRoom(Model model, Principal principal) {
+//        String message = principal.getName() ;
+//        model.addAttribute("message1", message);
+//        List<Room> lr = (List<Room>) repo.findAll();
+//        model.addAttribute("Rooms",lr);
+//        return "quanlyphong";
+//    }
     @GetMapping
-    public String showListRoom(Model model, Principal principal) {
-        String message = principal.getName() ;
-        model.addAttribute("message1", message);
-        List<Room> lr = (List<Room>) repo.findAll();
+    public String showListRoom(Model model, Principal principal){
+        String message = principal.getName();
+        model.addAttribute("message1",message);
+        List<Room> lr = roomService.showListRoom();
         model.addAttribute("Rooms",lr);
         return "quanlyphong";
     }
+
+//    @GetMapping("/search")
+//    public String searchRoom(@Param("keyword") String keyword,Model model,Principal principal) {
+//        String message = principal.getName() ;
+//        model.addAttribute("message1", message);
+//        keyword = keyword.trim();
+//        List<Room> lr = repo.findAll();
+//        List<Room> result  = new ArrayList<Room>();
+//        for (Room r : lr) {
+//            if(r.getRoom_id().toString().contains(keyword) ||
+//                    r.getType().toLowerCase().contains(keyword.toLowerCase()) ||
+//                    r.getIsEmpty().toLowerCase().contains(keyword.toLowerCase())||
+//                    r.getPriceDay().toString().contains(keyword)) {
+//                result.add(r);
+//            }
+//        }
+//        model.addAttribute("Rooms",result);
+//        return "quanlyphong";
+//    }
     @GetMapping("/search")
-    public String searchRoom(@Param("keyword") String keyword,Model model,Principal principal) {
-        String message = principal.getName() ;
+    public String searchRoom(@RequestParam("keyword") String keyword, Model model, Principal principal){
+        String message = principal.getName();
         model.addAttribute("message1", message);
         keyword = keyword.trim();
-        List<Room> lr = repo.findAll();
-        List<Room> result  = new ArrayList<Room>();
-        for (Room r : lr) {
-            if(r.getRoom_id().toString().contains(keyword) ||
-                    r.getType().toLowerCase().contains(keyword.toLowerCase()) ||
-                    r.getIsEmpty().toLowerCase().contains(keyword.toLowerCase())||
-                    r.getPriceDay().toString().contains(keyword)) {
-                result.add(r);
-            }
-        }
-        model.addAttribute("Rooms",result);
+        model.addAttribute("Rooms",roomService.searchRoom(keyword));
         return "quanlyphong";
     }
+
     @GetMapping("/add")
     public  String showAddRoom(Model model, Principal principal) {
         String message = principal.getName() ;
@@ -64,48 +86,76 @@ public class RoomController {
         return "themphong";
     }
 
+//    @PostMapping("/add")
+//    public  String addRoom(Room room) {
+//        repo.save(room);
+//        return "redirect:/quanlyphong";
+//    }
     @PostMapping("/add")
-    public  String addRoom(Room room) {
-        repo.save(room);
+    public String addRoom(Room room){
+        roomService.addRoom(room);
         return "redirect:/quanlyphong";
     }
 
+//    @GetMapping("/edit/{id}")
+//    public  String showEditRoom(@PathVariable(name = "id") Long id, Model model, Principal principal) {
+//        String message = principal.getName() ;
+//        model.addAttribute("message1", message);
+//        Room room = new Room();
+//        Optional<Room> optRoom = repo.findById(id);
+//        if(optRoom.isPresent()){
+//            room = optRoom.get();
+//        }
+//        model.addAttribute("Room", room );
+//        return "suaphong";
+//    }
     @GetMapping("/edit/{id}")
-    public  String showEditRoom(@PathVariable(name = "id") Long id, Model model, Principal principal) {
-        String message = principal.getName() ;
+    public String showEditRoom(@PathVariable(name = "id") Long id, Model model, Principal principal){
+        String message = principal.getName();
         model.addAttribute("message1", message);
-        Room room = new Room();
-        Optional<Room> optRoom = repo.findById(id);
-        if(optRoom.isPresent()){
-            room = optRoom.get();
-        }
-        model.addAttribute("Room", room );
+        model.addAttribute("Room",roomService.showEditRoom(id));
         return "suaphong";
     }
+
+//    @PostMapping("/edit/{id}")
+//    public  String editRoom(@PathVariable(name = "id") Long id,Room room) {
+//        Optional<Room> optRoom = repo.findById(id);
+//        if(optRoom.isPresent()){
+//            Room roomExist = optRoom.get();
+//            roomExist.setType(room.getType());
+//            roomExist.setPriceDay(room.getPriceDay());
+//            roomExist.setIsEmpty(room.getIsEmpty());
+//            repo.save(roomExist);
+//        }
+//        return "redirect:/quanlyphong";
+//    }
     @PostMapping("/edit/{id}")
-    public  String editRoom(@PathVariable(name = "id") Long id,Room room) {
-        Optional<Room> optRoom = repo.findById(id);
-        if(optRoom.isPresent()){
-            Room roomExist = optRoom.get();
-            roomExist.setType(room.getType());
-            roomExist.setPriceDay(room.getPriceDay());
-            roomExist.setIsEmpty(room.getIsEmpty());
-            repo.save(roomExist);
-        }
+    public String editRoom(Room room){
+        roomService.editRoom(room);
         return "redirect:/quanlyphong";
     }
+
+//    @GetMapping("/delete/{id}")
+//    public  String deleteRoom(Model model,@PathVariable(name = "id") Long id) {
+//        try{
+//            repo.deleteById(id);
+//            return "redirect:/quanlyphong";
+//        }catch (Exception e){
+//            String message = "Phòng đang được sử dụng" ;
+//            model.addAttribute("message", message);
+//            return "403Page";
+//        }
+//    }
     @GetMapping("/delete/{id}")
-    public  String deleteRoom(Model model,@PathVariable(name = "id") Long id) {
-        try{
-            repo.deleteById(id);
+    public String deleteRoom(@PathVariable(name = "id") Long id, Model model){
+        try {
+            roomService.deleteRoom(id);
             return "redirect:/quanlyphong";
         }catch (Exception e){
-            String message = "Phòng đang được sử dụng" ;
-            model.addAttribute("message", message);
+            String message = "Phòng đang được sử dụng";
+            model.addAttribute("message",message);
             return "403Page";
         }
-
     }
-
 
 }
