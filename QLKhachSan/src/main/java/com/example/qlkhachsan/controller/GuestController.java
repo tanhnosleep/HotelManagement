@@ -32,8 +32,6 @@ public class GuestController {
 
     @GetMapping
     public  String showAddGuest(Model model) {
-//        String message = principal.getName() ;
-//        model.addAttribute("message1", message);
         model.addAttribute("AppUser", new AppUser());
         model.addAttribute("Guest", new Guest() );
         return "dangky";
@@ -57,7 +55,8 @@ public class GuestController {
 //        return "dangkythanhcong";
 //    }
     @PostMapping
-    public String addGuest(@ModelAttribute("AppUser") AppUser appUser, @ModelAttribute("Guest") Guest guest, Model model){
+    public String addGuest(@ModelAttribute("AppUser") AppUser appUser,
+                           @ModelAttribute("Guest") Guest guest, Model model){
         guestService.registerUser(appUser, guest);
         return "dangkythanhcong";
     }

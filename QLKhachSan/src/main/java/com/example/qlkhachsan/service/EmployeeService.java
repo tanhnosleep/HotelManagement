@@ -19,11 +19,11 @@ public class EmployeeService {
     }
 
     public List<Employee> showListEmployee(){
-        return employeeRepository.showListEmployee();
+        return employeeRepository.findAll();
     }
 
     public List<Employee> searchEmployee(String keyword){
-        List<Employee> allEmployees = employeeRepository.showListEmployee();
+        List<Employee> allEmployees = employeeRepository.findAll();
         List<Employee> result = new ArrayList<Employee>();
         for (Employee e : allEmployees){
             if(e.getEmployeeId().toString().contains(keyword) ||
@@ -40,23 +40,19 @@ public class EmployeeService {
         return result;
     }
     public void addEmployee (Employee employee){
-        employeeRepository.addEmployee(employee.getEmployeeId(),employee.getEmployeeName(),
-                employee.getBirth(),employee.getGender(),employee.getAddress(),employee.getEmail(),
-                employee.getPhoneNumber(),employee.getSalary());
+        employeeRepository.save(employee);
     }
 
     public Employee showEditEmployee(Long id){
-        Optional<Employee> optionalEmployee = employeeRepository.findEmployeeByID(id).stream().findFirst();
+        Optional<Employee> optionalEmployee = employeeRepository.findById(id);
         return optionalEmployee.orElse(null);
     }
 
     public void editEmployee(Employee employee){
-            employeeRepository.editEmployee(employee.getEmployeeId(),employee.getEmployeeName(),
-                    employee.getBirth(), employee.getGender(), employee.getAddress(),
-                    employee.getEmail(), employee.getPhoneNumber(),employee.getSalary());
+            employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long id){
-        employeeRepository.deleteEmployee(id);
+        employeeRepository.deleteById(id);
     }
 }

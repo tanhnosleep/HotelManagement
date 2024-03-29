@@ -35,7 +35,8 @@ public class RentalService {
         List<Rental> lr = rentalRepository.findAll();
         List<Rental> result  = new ArrayList<Rental>();
         for (Rental r : lr) {
-            if((r.getRoom().getRoom_id().toString().contains(keyword))||(r.getGuest().getGuestId().toString().contains(keyword))) {
+            if((r.getRoom().getRoom_id().toString().contains(keyword))||
+                    (r.getGuest().getGuestId().toString().contains(keyword))) {
                 result.add(r);
             }
         }
