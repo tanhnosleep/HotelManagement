@@ -1,9 +1,9 @@
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.GuestRepository;
-import com.example.qlkhachsan.Repository.RoleRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
-import com.example.qlkhachsan.Repository.UserRollRepository;
+import com.example.qlkhachsan.repository.GuestRepository;
+import com.example.qlkhachsan.repository.RoleRepository;
+import com.example.qlkhachsan.repository.UserRepository;
+import com.example.qlkhachsan.repository.UserRollRepository;
 import com.example.qlkhachsan.model.AppRole;
 import com.example.qlkhachsan.model.AppUser;
 import com.example.qlkhachsan.model.Guest;

@@ -1,22 +1,15 @@
 package com.example.qlkhachsan.controller;
 
 
-import com.example.qlkhachsan.Repository.EmployeeRepository;
 import com.example.qlkhachsan.model.Employee;
 import com.example.qlkhachsan.service.EmployeeService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 //@AllArgsConstructor
 //@NoArgsConstructor

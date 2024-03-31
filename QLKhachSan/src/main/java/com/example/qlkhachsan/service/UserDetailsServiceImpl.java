@@ -3,8 +3,8 @@
 
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.RoleRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
+import com.example.qlkhachsan.repository.RoleRepository;
+import com.example.qlkhachsan.repository.UserRepository;
 import com.example.qlkhachsan.model.AppUser;
 import org.springframework.beans.factory.annotation.Autowired   ;
 import org.springframework.security.core.GrantedAuthority;

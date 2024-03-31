@@ -1,13 +1,10 @@
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.GuestRepository;
-import com.example.qlkhachsan.model.Employee;
+import com.example.qlkhachsan.repository.GuestRepository;
 import com.example.qlkhachsan.model.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

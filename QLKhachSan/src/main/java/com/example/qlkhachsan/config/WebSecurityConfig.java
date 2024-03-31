@@ -53,7 +53,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         //URL yêu cầu vai trò nào cũng truy cập được
-        http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+//        http.authorizeRequests().antMatchers("/").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
+        http.authorizeRequests().antMatchers("/").permitAll();
 //        http.authorizeRequests().antMatchers("/dangky").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')");
 
         //URL yêu cầu vai trò ROLE_USER

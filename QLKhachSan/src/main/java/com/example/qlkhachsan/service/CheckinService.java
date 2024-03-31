@@ -1,17 +1,14 @@
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.RentalRepository;
-import com.example.qlkhachsan.Repository.RoomRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
+import com.example.qlkhachsan.repository.RentalRepository;
+import com.example.qlkhachsan.repository.RoomRepository;
+import com.example.qlkhachsan.repository.UserRepository;
 import com.example.qlkhachsan.model.AppUser;
-import com.example.qlkhachsan.model.Guest;
 import com.example.qlkhachsan.model.Rental;
 import com.example.qlkhachsan.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 

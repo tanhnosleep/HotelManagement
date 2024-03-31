@@ -1,6 +1,6 @@
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.EmployeeRepository;
+import com.example.qlkhachsan.repository.EmployeeRepository;
 import com.example.qlkhachsan.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

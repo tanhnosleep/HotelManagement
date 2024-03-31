@@ -1,21 +1,11 @@
 package com.example.qlkhachsan.controller;
 
-import com.example.qlkhachsan.Repository.GuestRepository;
-import com.example.qlkhachsan.Repository.RoleRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
-import com.example.qlkhachsan.Repository.UserRollRepository;
 import com.example.qlkhachsan.model.*;
 import com.example.qlkhachsan.service.GuestService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
 
 @Controller
 @AllArgsConstructor

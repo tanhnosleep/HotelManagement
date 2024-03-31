@@ -1,24 +1,15 @@
 package com.example.qlkhachsan.controller;
 
 
-import com.example.qlkhachsan.Repository.RoomRepository;
 import com.example.qlkhachsan.model.Room;
 import com.example.qlkhachsan.service.RoomService;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/quanlyphong")

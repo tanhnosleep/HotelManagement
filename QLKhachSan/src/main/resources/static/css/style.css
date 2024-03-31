@@ -129,6 +129,17 @@
     cursor: pointer;
 }
 
+.login {
+    color: white;
+    position: absolute;
+    bottom: 1rem;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    cursor: pointer;
+    bottom: 0;
+}
+
 .logout {
     color: white;
     position: absolute;

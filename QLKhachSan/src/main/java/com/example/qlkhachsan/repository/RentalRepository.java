@@ -1,4 +1,4 @@
-package com.example.qlkhachsan.Repository;
+package com.example.qlkhachsan.repository;
 
 import com.example.qlkhachsan.model.Rental;
 import org.springframework.data.jpa.repository.JpaRepository;

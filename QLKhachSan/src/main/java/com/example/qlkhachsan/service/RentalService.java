@@ -1,19 +1,13 @@
 package com.example.qlkhachsan.service;
 
-import com.example.qlkhachsan.Repository.RentalRepository;
-import com.example.qlkhachsan.Repository.RoomRepository;
+import com.example.qlkhachsan.repository.RentalRepository;
+import com.example.qlkhachsan.repository.RoomRepository;
 import com.example.qlkhachsan.model.Rental;
-import com.example.qlkhachsan.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
-import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class RentalService {

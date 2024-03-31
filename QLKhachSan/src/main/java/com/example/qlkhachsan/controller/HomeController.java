@@ -16,9 +16,14 @@ public class HomeController {
 
     @GetMapping(value = {"/", "home"})
     public String homePage(Model model,Principal principal) {
-        String message = principal.getName() ;
-        model.addAttribute("message1", message);
-
+        if(principal == null){
+            String message = "";
+            model.addAttribute("message", message);
+        }
+        else {
+            String message = principal.getName();
+            model.addAttribute("message1", message);
+        }
         return "home";
     }
     @GetMapping("/login")

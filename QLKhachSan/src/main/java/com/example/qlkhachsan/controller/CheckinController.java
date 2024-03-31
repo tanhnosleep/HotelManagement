@@ -1,17 +1,9 @@
 package com.example.qlkhachsan.controller;
 
 
-import com.example.qlkhachsan.Repository.GuestRepository;
-import com.example.qlkhachsan.Repository.RentalRepository;
-import com.example.qlkhachsan.Repository.RoomRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
 import com.example.qlkhachsan.model.*;
 import com.example.qlkhachsan.service.CheckinService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 //@NoArgsConstructor
 //@AllArgsConstructor

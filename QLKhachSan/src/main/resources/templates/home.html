@@ -56,9 +56,15 @@
       <div   class="nav-item pl-3c4">
         <a th:href="@{/quanlynhanvien}" style="text-decoration: none;color: white">QL Nhân Viên</a>
       </div>
-      <div id="btn-logout" class="logout" >
-        <i style="font-size: 1.25rem;" class="fa fa-sign-out pr-1" aria-hidden="true" ></i>
-        <a th:href="@{/logout}" style="text-decoration: none;color: white">Đăng xuất</a>
+      <div>
+        <div id="btn-logout" class="logout" th:if="${message != null and message != ''}">
+          <i style="font-size: 1.25rem;" class="fa fa-sign-out pr-1" aria-hidden="true" ></i>
+          <a th:href="@{/logout}" style="text-decoration: none;color: white">Đăng xuất</a>
+        </div>
+        <div id="btn-login" class="login" th:unless="${message != null and message != ''}">
+          <i style="font-size: 1.25rem;" class="fa fa-sign-in pr-1" aria-hidden="true" ></i>
+          <a th:href="@{/login}" style="text-decoration: none;color: white">Đăng nhập</a>
+        </div>
       </div>
     </div>
 

@@ -1,19 +1,12 @@
 package com.example.qlkhachsan.controller;
 
 
-import com.example.qlkhachsan.Repository.GuestRepository;
-import com.example.qlkhachsan.Repository.RentalRepository;
-import com.example.qlkhachsan.Repository.RoomRepository;
-import com.example.qlkhachsan.Repository.UserRepository;
 import com.example.qlkhachsan.model.AppUser;
 import com.example.qlkhachsan.model.Guest;
 import com.example.qlkhachsan.model.Rental;
 import com.example.qlkhachsan.model.Room;
 import com.example.qlkhachsan.service.CheckoutService;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

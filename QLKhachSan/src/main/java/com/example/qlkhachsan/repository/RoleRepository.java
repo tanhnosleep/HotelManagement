@@ -1,4 +1,4 @@
-package com.example.qlkhachsan.Repository;
+package com.example.qlkhachsan.repository;
 
 import java.util.List;
 
