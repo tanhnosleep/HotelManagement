@@ -15,30 +15,31 @@ import java.security.Principal;
 public class HomeController {
 
     @GetMapping(value = {"/", "home"})
-    public String homePage(Model model,Principal principal) {
-        if(principal == null){
-            String message = "";
-            model.addAttribute("message", message);
-        }
-        else {
+    public String homePage(Model model, Principal principal) {
+        if (principal == null) {
+            String message = null;
+            model.addAttribute("message1", message);
+        } else {
             String message = principal.getName();
             model.addAttribute("message1", message);
         }
         return "home";
     }
+
     @GetMapping("/login")
     public String login(Model model) {
         return "login";
     }
+
     @GetMapping(value = "/403")
     public String accessDenied(Model model, Principal principal) {
-        if(principal != null) {
-            User loginUser = (User) ((Authentication)principal).getPrincipal();
+        if (principal != null) {
+            User loginUser = (User) ((Authentication) principal).getPrincipal();
             String userInfor = WebUtils.toString(loginUser);
             model.addAttribute("userInfor", userInfor);
             String message = "Xin chào " + principal.getName() + ". Bạn không có quyền truy cập vào chức năng này";
             model.addAttribute("message", message);
-            message = principal.getName() ;
+            message = principal.getName();
             model.addAttribute("message1", message);
         }
         return "403Page";

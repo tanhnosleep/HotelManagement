@@ -33,11 +33,8 @@
             <label>Giá: </label>
             <input type="text" th:field="*{priceDay}"/> <br/>
             <label>Tình trạng: </label>
-            <select  name="typeRoom" th:field="*{isEmpty}"> <br/>
-                <option value="Trống">Trống</option>
-                <option value="Đã SD">Đã SD</option>
-            </select><br/>
-
+            <input  name="typeRoom" th:field="*{isEmpty}" disabled> <br/>
+            </input><br/>
             <br/>
             <button type="submit" class="btn btn-success aBtn" style="margin-left: 40%">
                 <i style="color: white;font-size: large" >  Sửa </i>

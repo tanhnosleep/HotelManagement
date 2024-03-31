@@ -37,31 +37,31 @@
         <a th:href="@{/}" style="text-decoration: none;color: white">Khách Sạn</a>
       </div>
 
-      <div   class="nav-item pl-3c4">
+      <div   class="nav-item pl-3c4" th:if="${message1 != 'admin' && message1 != null }">
         <a th:href="@{/checkin}" style="text-decoration: none;color: white">Thuê Phòng</a>
 
       </div>
-      <div   class="nav-item pl-3c4">
+      <div   class="nav-item pl-3c4" th:if="${message1 != 'admin' && message1 != null }">
         <a th:href="@{/checkout}" style="text-decoration: none;color: white">Trả Phòng</a>
       </div>
       <div   class="nav-item pl-3c4">
-        <a th:href="@{/quanlythue}" style="text-decoration: none;color: white">QL Thuê</a>
+        <a th:href="@{/quanlythue}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL Thuê</a>
       </div>
       <div   class="nav-item pl-3c4">
-        <a th:href="@{/khachhang}" style="text-decoration: none;color: white">QL TT Khách Hàng</a>
+        <a th:href="@{/khachhang}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL TT Khách Hàng</a>
       </div>
       <div   class="nav-item pl-3c4">
-        <a th:href="@{/quanlyphong}" style="text-decoration: none;color: white">QL Phòng</a>
+        <a th:href="@{/quanlyphong}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL Phòng</a>
       </div>
       <div   class="nav-item pl-3c4">
-        <a th:href="@{/quanlynhanvien}" style="text-decoration: none;color: white">QL Nhân Viên</a>
+        <a th:href="@{/quanlynhanvien}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL Nhân Viên</a>
       </div>
       <div>
-        <div id="btn-logout" class="logout" th:if="${message != null and message != ''}">
+        <div id="btn-logout" class="logout" th:if="${message1 != null}">
           <i style="font-size: 1.25rem;" class="fa fa-sign-out pr-1" aria-hidden="true" ></i>
           <a th:href="@{/logout}" style="text-decoration: none;color: white">Đăng xuất</a>
         </div>
-        <div id="btn-login" class="login" th:unless="${message != null and message != ''}">
+        <div id="btn-login" class="login" th:if="${message1 == null}">
           <i style="font-size: 1.25rem;" class="fa fa-sign-in pr-1" aria-hidden="true" ></i>
           <a th:href="@{/login}" style="text-decoration: none;color: white">Đăng nhập</a>
         </div>

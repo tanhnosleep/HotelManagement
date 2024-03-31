@@ -50,6 +50,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().usernameParameter("username").passwordParameter("pass")
                 .loginPage("/login")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
+                .invalidateHttpSession(true).deleteCookies("JSESSIONID")
                 .permitAll();
 
         //URL yêu cầu vai trò nào cũng truy cập được
