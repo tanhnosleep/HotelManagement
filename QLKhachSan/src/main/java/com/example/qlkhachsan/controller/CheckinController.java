@@ -113,18 +113,24 @@ public class CheckinController {
 //        return "formdat";
 //    }
     @GetMapping("/add/{id}")
-    public String showListGuest(@PathVariable("id") Long id, Model model, Principal principal){
-        String message = principal.getName();
-        model.addAttribute("message1", message);
-        AppUser appUser = checkinService.findUserName(message);
-        Guest guest = appUser.getGuest();
-        Room room = checkinService.findRoomById(id);
-        if(room.getIsEmpty().equalsIgnoreCase("Đã SD")){
+    public String showRoomAndGuest(@PathVariable("id") Long id, Model model, Principal principal){
+//        boolean check=false;
+//        String message = principal.getName();
+//        model.addAttribute("message1", message);
+//        AppUser appUser = checkinService.findUserName(message);
+//        Guest guest = appUser.getGuest();
+//        Room room = checkinService.findRoomById(id);
+//        if(room.getIsEmpty().equalsIgnoreCase("Đã SD")){
+//            return "datloi";
+//        }
+//        model.addAttribute("Room",room);
+//        model.addAttribute("Guest",guest);
+        if (!checkinService.showRoomAndGuest(id, model, principal)){
             return "datloi";
         }
-        model.addAttribute("Room",room);
-        model.addAttribute("Guest",guest);
-        return "formdat";
+        else {
+            return "formdat";
+        }
     }
 
 //    @GetMapping("/add/{id}/submit")
@@ -152,19 +158,20 @@ public class CheckinController {
 //    }
     @GetMapping("/add/{id}/submit")
     public String checkinForm(@PathVariable(name = "id") Long id, Model model, Principal principal){
-        String message = principal.getName();
-        model.addAttribute("message1",message);
-        AppUser appUser = checkinService.findUserName(message);
-        Guest guest = appUser.getGuest();
-        Room room = checkinService.findRoomById(id);
-        room.setIsEmpty("Đã SD");
-        checkinService.saveRoom(room);
-        Rental rental = new Rental();
-        rental.setRoom(room);
-        rental.setGuest(guest);
-        rental.setCheckInDate(new Date());
-        checkinService.saveRental(rental);
-        model.addAttribute("Rental",rental);
+//        String message = principal.getName();
+//        model.addAttribute("message1",message);
+//        AppUser appUser = checkinService.findUserName(message);
+//        Guest guest = appUser.getGuest();
+//        Room room = checkinService.findRoomById(id);
+//        room.setIsEmpty("Đã SD");
+//        checkinService.saveRoom(room);
+//        Rental rental = new Rental();
+//        rental.setRoom(room);
+//        rental.setGuest(guest);
+//        rental.setCheckInDate(new Date());
+//        checkinService.saveRental(rental);
+//        model.addAttribute("Rental",rental);
+        checkinService.checkinForm(id, model, principal);
         return "datthanhcong";
     }
 }

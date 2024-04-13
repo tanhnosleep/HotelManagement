@@ -1,5 +1,6 @@
 package com.example.qlkhachsan.service;
 
+import com.example.qlkhachsan.model.Guest;
 import com.example.qlkhachsan.repository.RentalRepository;
 import com.example.qlkhachsan.repository.RoomRepository;
 import com.example.qlkhachsan.repository.UserRepository;
@@ -7,8 +8,14 @@ import com.example.qlkhachsan.model.AppUser;
 import com.example.qlkhachsan.model.Rental;
 import com.example.qlkhachsan.model.Room;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import java.security.Principal;
+import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class CheckoutService {
@@ -50,5 +57,51 @@ public class CheckoutService {
 
     public List<Rental> findByGuestIDandRoomID(Long ud, Long id){
         return rentalRepository.findByGuestIDandRoomID(ud,id);
+    }
+
+    public void searchRoom(Model model, Principal principal){
+        String message = principal.getName();
+        model.addAttribute("message1",message);
+        AppUser appUser = userRepository.findUserName(message);
+        Guest guest = appUser.getGuest();
+        List<Long> lr = rentalRepository.findRoomByGuestID(guest.getGuestId());
+        List<Room> rooms = roomRepository.findAll();
+
+        Set<Room> result = new HashSet<>();
+        for (Long r : lr){
+            Room room = roomRepository.findById(r).orElse(null);;
+            if(room != null && room.getIsEmpty().equalsIgnoreCase("Đã SD")){
+                result.add(room);
+            }
+        }
+        model.addAttribute("Guest",guest);
+        model.addAttribute("Rooms", result);
+    }
+
+    public void checkoutForm(Long id, Long ud, Model model, Principal principal){
+        String message = principal.getName() ;
+        model.addAttribute("message1", message);
+
+        Room room = roomRepository.findById(id).orElse(null);;
+        Rental rental = new Rental();
+        List<Rental> lrent = rentalRepository.findByGuestIDandRoomID(ud,id);
+        rental = lrent.get(lrent.size()-1);
+        rental.setCheckOutDate(new Date());
+        rentalRepository.save(rental);
+        room.setIsEmpty("Trống");
+        roomRepository.save(room);
+        Long getDiff = rental.getCheckOutDate().getTime()-rental.getCheckInDate().getTime();
+        Long getDaysDiff = TimeUnit.MILLISECONDS.toSeconds(getDiff);
+        Double payment = (Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay());
+        model.addAttribute("Rental",rental);
+        model.addAttribute("payment",payment);
+    }
+
+    public void showResult(Long id, Long ud, Model model){
+        Room room = roomRepository.findById(id).orElse(null);
+        Rental rental = new Rental();
+        List<Rental> lrent = rentalRepository.findByGuestIDandRoomID(ud,id);
+        rental = lrent.get(lrent.size()-1);
+        model.addAttribute("Rental",rental);
     }
 }

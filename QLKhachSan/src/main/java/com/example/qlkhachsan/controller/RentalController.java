@@ -107,25 +107,26 @@ public class RentalController {
     public String showEditRoom(@PathVariable(name = "id") Long id,
                                @PathVariable(name = "ud") Long ud,
                                Model model,Principal principal){
-        Room room = new Room();
-        Optional<Room> optRoom =roomService.showRoomById(id);
-        if(optRoom.isPresent()){
-            room=optRoom.get();
-        }
-        Rental rental = new Rental();
-        List<Rental> lrent = rentalService.findByGuestIDandRoomID(ud,id);
-        rental = lrent.get(lrent.size()-1);
-
-        rental.setCheckOutDate(new Date());
-        room.setIsEmpty("Trống");
-        roomService.editRoom(room);
-//        renrepo.save(rental);
-        Long getDiff = rental.getCheckOutDate().getTime()-rental.getCheckInDate().getTime();
-        Long getDaysDiff = TimeUnit.MILLISECONDS.toSeconds(getDiff);
-        Double payment = (Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay());
-        rentalService.editRental(rental);
-        model.addAttribute("Rental",rental);
-        model.addAttribute("payment",payment);
+//        Room room = new Room();
+//        Optional<Room> optRoom =roomService.showRoomById(id);
+//        if(optRoom.isPresent()){
+//            room=optRoom.get();
+//        }
+//        Rental rental = new Rental();
+//        List<Rental> lrent = rentalService.findByGuestIDandRoomID(ud,id);
+//        rental = lrent.get(lrent.size()-1);
+//
+//        rental.setCheckOutDate(new Date());
+//        room.setIsEmpty("Trống");
+//        roomService.editRoom(room);
+////        renrepo.save(rental);
+//        Long getDiff = rental.getCheckOutDate().getTime()-rental.getCheckInDate().getTime();
+//        Long getDaysDiff = TimeUnit.MILLISECONDS.toSeconds(getDiff);
+//        Double payment = (Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay());
+//        rentalService.editRental(rental);
+//        model.addAttribute("Rental",rental);
+//        model.addAttribute("payment",payment);
+        rentalService.showEditRental(id,ud,model,principal);
         return "payment";
     }
 
@@ -146,17 +147,18 @@ public class RentalController {
     @GetMapping("/pay/{id}/{ud}/payment")
     public String showResult(@PathVariable(name = "id") Long id,
                              @PathVariable(name = "ud") Long ud,
-                             Model model, Principal principal){
-        Room room = new Room();
-        Optional<Room> optRoom = roomService.showRoomById(id);
-        if(optRoom.isPresent()){
-            room=optRoom.get();
-        }
-        Rental rental = new Rental();
-        List<Rental> lrent = rentalService.findByGuestIDandRoomID(ud,id);
-        rental = lrent.get(lrent.size()-1);
-
-        model.addAttribute("Rental",rental);
+                             Model model){
+//        Room room = new Room();
+//        Optional<Room> optRoom = roomService.showRoomById(id);
+//        if(optRoom.isPresent()){
+//            room=optRoom.get();
+//        }
+//        Rental rental = new Rental();
+//        List<Rental> lrent = rentalService.findByGuestIDandRoomID(ud,id);
+//        rental = lrent.get(lrent.size()-1);
+//
+//        model.addAttribute("Rental",rental);
+        rentalService.showResult(id, ud, model);
         return "trathanhcongadmin";
     }
 
