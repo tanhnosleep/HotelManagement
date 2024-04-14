@@ -34,8 +34,8 @@
             </tr>
             <tr th:each="Rental: ${Rentals}">
                 <td th:text="${Rental.rentalId}"></td>
-                <td th:text="${Rental.checkInDate}"></td>
-                <td th:text="${Rental.checkOutDate}"></td>
+                <td th:text="${@rentalService.formatDate(Rental.getCheckInDate)}"></td>
+                <td th:text="${@rentalService.formatDate(Rental.getCheckOutDate)}"></td>
                 <td th:text="${Rental.room.room_id}"></td>
                 <td th:text="${Rental.guest.guestId}"></td>
                 <td th:if="${Rental.checkOutDate==null}">
