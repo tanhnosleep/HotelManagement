@@ -5,8 +5,11 @@ import com.example.qlkhachsan.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -16,6 +19,20 @@ public class EmployeeService {
     @Autowired
     public EmployeeService(EmployeeRepository employeeRepository){
         this.employeeRepository=employeeRepository;
+    }
+
+    public String formatSalary(double salary){
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        //xác định các ký hiệu (symbols) như dấu phân cách hàng nghìn, dấu phân cách thập phân
+        //Locale.getDefault() được sử dụng để lấy Locale mặc định của hệ thống, chẳng hạn như "vi_VN" cho tiếng Việt.
+
+        symbols.setDecimalSeparator(','); //Đặt dấu phân cách thập phân là dấu phẩy (',').
+        symbols.setGroupingSeparator('.'); //Đặt dấu phân cách hàng nghìn là dấu chấm ('.').
+
+        DecimalFormat formatter = new DecimalFormat("#,##0",symbols);
+        //"#,##0" là mẫu định dạng số để định dạng salary theo kiểu hàng nghìn, không có số thập phân.
+
+        return formatter.format(salary)+" VNĐ";
     }
 
     public List<Employee> showListEmployee(){

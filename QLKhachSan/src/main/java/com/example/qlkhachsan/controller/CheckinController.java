@@ -172,6 +172,9 @@ public class CheckinController {
 //        checkinService.saveRental(rental);
 //        model.addAttribute("Rental",rental);
         checkinService.checkinForm(id, model, principal);
+        Rental rental = (Rental) model.getAttribute("Rental");
+        String formattedCheckInDate = checkinService.formatDate(rental.getCheckInDate());
+        model.addAttribute("formattedCheckInDate",formattedCheckInDate);
         return "datthanhcong";
     }
 }

@@ -159,6 +159,9 @@ public class RentalController {
 //
 //        model.addAttribute("Rental",rental);
         rentalService.showResult(id, ud, model);
+        Rental rental = (Rental) model.getAttribute("Rental");
+        String formattedCheckOutDate = rentalService.formatDate(rental.getCheckOutDate());
+        model.addAttribute("formattedCheckOutDate",formattedCheckOutDate);
         return "trathanhcongadmin";
     }
 

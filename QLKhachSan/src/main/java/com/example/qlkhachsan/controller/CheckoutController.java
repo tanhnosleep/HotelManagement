@@ -159,6 +159,9 @@ public class CheckoutController {
 //        rental = lrent.get(lrent.size()-1);
 //        model.addAttribute("Rental",rental);
         checkoutService.showResult(id, ud, model);
+        Rental rental = (Rental) model.getAttribute("Rental");
+        String formattedCheckOutDate = checkoutService.formatDate(rental.getCheckOutDate());
+        model.addAttribute("formattedCheckOutDate",formattedCheckOutDate);
         return "trathanhcong";
     }
 }

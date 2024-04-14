@@ -34,7 +34,8 @@
             <tr th:each="Room: ${Rooms}">
                 <td th:text="${Room.room_id}"></td>
                 <td th:text="${Room.type}"></td>
-                <td th:text="${Room.priceDay}"></td>
+<!--                <td th:text="${Room.priceDay}"></td>-->
+                <td th:text="${@roomService.formatPrice(Room.priceDay)}"></td>
                 <td th:text="${Room.isEmpty}"></td>
                 <td>
                     <button class="btn btn-success aBtn" type="button"><a

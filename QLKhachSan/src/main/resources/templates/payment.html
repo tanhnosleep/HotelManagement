@@ -21,7 +21,8 @@
 
 
         <label>Số Tiền phải trả</label>
-        <input type="text" th:value="${payment}" readonly>
+<!--        <input type="text" th:value="${payment}" readonly>-->
+        <input type="text" th:value="${@roomService.formatPrice(payment)}" readonly>
         <label>Nhập số thẻ thanh toán </label>
         <input type="text" >
 

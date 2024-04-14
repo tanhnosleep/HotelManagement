@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.security.Principal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,11 @@ public class RentalService {
     public RentalService(RentalRepository rentalRepository, RoomRepository roomRepository){
         this.rentalRepository=rentalRepository;
         this.roomRepository=roomRepository;
+    }
+
+    public String formatDate(Date date){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return dateFormat.format(date);
     }
 
     public List<Rental> showListRental(){

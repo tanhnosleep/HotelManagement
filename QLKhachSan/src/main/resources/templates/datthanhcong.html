@@ -20,7 +20,7 @@
         <div style="padding-left: 50px">
             <h1>Thuê thành công</h1><br/>
             <input th:value="@{'Mã đặt:  ' + ${Rental.rentalId}}" style="width: 50%;font-size: large"  readonly > <br/>
-            <input th:value="@{'Vào lúc:  ' + ${Rental.checkInDate}}" style="width: 50%;font-size: large"  readonly > <br/>
+            <input th:value="@{'Vào lúc:  ' + ${formattedCheckInDate}}" style="width: 50%;font-size: large"  readonly > <br/>
         </div>
 
         <br/>

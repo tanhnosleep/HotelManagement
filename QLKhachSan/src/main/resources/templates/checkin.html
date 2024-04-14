@@ -41,8 +41,9 @@
               <img  th:src="@{/images/chamber.png}"  alt="Room">
               <div class="number" th:utext="${Room.room_id}"></div>
               <div class="price">
-                <span style="font-size: 15px; color: red">đ </span><span
-                      th:utext="${Room.priceDay}"></span>
+<!--                <span style="font-size: 15px; color: red">đ </span>-->
+<!--                <span th:utext="${Room.priceDay}"></span>-->
+                <span th:utext="${@roomService.formatPrice(Room.priceDay)}"></span>
               </div>
               <input style="display: none;" type="checkbox"
                      id="check-status" th:attr="checked=${Room.isEmpty}">

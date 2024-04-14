@@ -43,7 +43,8 @@
         <td th:text="${nv.address}"></td>
         <td th:text="${nv.email}"></td>
         <td th:text="${nv.phoneNumber}"></td>
-        <td th:text="${nv.salary}"></td>
+<!--        <td th:text="${nv.salary}"></td>-->
+        <td th:text="${@employeeService.formatSalary(nv.salary)}"></td>
         <td>
           <button class="btn btn-success aBtn" type="button"><a
                   style="text-decoration: none;color: white"

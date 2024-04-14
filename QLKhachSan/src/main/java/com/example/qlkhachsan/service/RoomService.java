@@ -5,8 +5,11 @@ import com.example.qlkhachsan.model.Room;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Service
@@ -17,6 +20,14 @@ public class RoomService {
     @Autowired
     public RoomService(RoomRepository roomRepository){
         this.roomRepository=roomRepository;
+    }
+
+    public String formatPrice(double priceDay){
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setDecimalSeparator(',');
+        symbols.setGroupingSeparator('.');
+        DecimalFormat formatter = new DecimalFormat("#,##0",symbols);
+        return formatter.format(priceDay)+ " VNĐ";
     }
 
     public List<Room> showListRoom(){
