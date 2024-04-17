@@ -53,6 +53,7 @@ public class RoomService {
     }
 
     public void addRoom(Room room){
+        room.setIsEmpty("Trống");
         roomRepository.save(room);
     }
 

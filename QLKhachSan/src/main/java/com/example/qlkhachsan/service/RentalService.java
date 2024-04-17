@@ -30,6 +30,9 @@ public class RentalService {
 
     public String formatDate(Date date){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        if(date == null){
+            return null;
+        }
         return dateFormat.format(date);
     }
 
