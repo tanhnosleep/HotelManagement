@@ -22,8 +22,13 @@
             <button class="btn btn-success aBtn" type="submit" value="search">
                 <a  style="color: white;font-size: large;text-decoration: none">Tìm</a>
             </button>
-
         </form>
+        <div class="btn-create">
+            <button class="btn btn-success aBtn" type="button">
+                <a class="fa fa-hotel" style="color: white;font-size: large;text-decoration: none"
+                   th:href="@{/quanlyphong/add}"> Thêm Phòng</a>
+            </button>
+        </div>
         <table>
             <tr>
                 <th>Mã phòng</th>
@@ -50,10 +55,6 @@
             </tr>
         </table>
         <br>
-        <button class="btn btn-success aBtn" type="button">
-            <a class="fa fa-hotel" style="color: white;font-size: large;text-decoration: none"
-               th:href="@{/quanlyphong/add}"> Thêm Phòng</a>
-        </button>
     </div>
 </div>
 </body>

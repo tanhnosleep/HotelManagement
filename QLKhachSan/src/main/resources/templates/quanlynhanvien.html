@@ -22,8 +22,13 @@
       <button class="btn btn-success aBtn" type="submit" value="search">
         <a  style="color: white;font-size: large;text-decoration: none">Tìm</a>
       </button>
-
     </form>
+    <div class="btn-create">
+      <button class="btn btn-success aBtn" type="button">
+        <a class="fa fa-user" style="color: white;font-size: large;text-decoration: none"
+           th:href="@{/quanlynhanvien/add}"> Thêm Nhân Viên</a>
+      </button>
+    </div>
     <table>
       <tr>
         <th>Mã NV</th>
@@ -57,11 +62,6 @@
         </td>
       </tr>
     </table>
-    <br>
-    <button class="btn btn-success aBtn" type="button">
-      <a class="fa fa-user" style="color: white;font-size: large;text-decoration: none"
-         th:href="@{/quanlynhanvien/add}"> Thêm Nhân Viên</a>
-    </button>
   </div>
 </div>
 </body>
