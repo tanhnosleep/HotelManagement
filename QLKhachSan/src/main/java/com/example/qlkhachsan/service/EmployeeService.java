@@ -5,12 +5,8 @@ import com.example.qlkhachsan.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Optional;
+import java.text.*;
+import java.util.*;
 
 @Service
 public class EmployeeService {
@@ -57,16 +53,53 @@ public class EmployeeService {
         return result;
     }
     public void addEmployee (Employee employee){
+        String inputDateStr = employee.getBirth();
+        String outputDateFormat = "dd/MM/yyyy";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputDateFormatObj = new SimpleDateFormat(outputDateFormat);
+        try {
+            Date inputDate = inputDateFormat.parse(inputDateStr);
+            String outputDateStr = outputDateFormatObj.format(inputDate);
+            employee.setBirth(outputDateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         employeeRepository.save(employee);
     }
 
     public Employee showEditEmployee(Long id){
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
+        if (optionalEmployee.isPresent()){
+            Employee employee = optionalEmployee.get();
+            String birthDateStr = employee.getBirth();
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                //parse de doi String thanh Date
+                //format de doi Date thanh String
+                Date birthDate = inputDateFormat.parse(birthDateStr);
+                String formattedBirthDate = outputDateFormat.format(birthDate);
+                employee.setBirth(formattedBirthDate);
+            }catch (ParseException e){
+                throw new RuntimeException(e);
+            }
+        }
         return optionalEmployee.orElse(null);
     }
 
     public void editEmployee(Employee employee){
-            employeeRepository.save(employee);
+        String inputDateStr = employee.getBirth();
+        String outputDateFormat = "dd/MM/yyyy";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputDateFormatObj = new SimpleDateFormat(outputDateFormat);
+        try {
+            Date inputDate = inputDateFormat.parse(inputDateStr);
+            String outputDateStr = outputDateFormatObj.format(inputDate);
+            employee.setBirth(outputDateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        employeeRepository.save(employee);
     }
 
     public void deleteEmployee(Long id){

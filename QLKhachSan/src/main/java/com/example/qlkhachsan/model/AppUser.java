@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "app_user", //
+@Table(name = "app_user",
         uniqueConstraints = { @UniqueConstraint(name = "APP_USER_UK", columnNames = "user_name") })
 public class AppUser {
     @Id

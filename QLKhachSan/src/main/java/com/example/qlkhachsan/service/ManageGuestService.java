@@ -1,11 +1,15 @@
 package com.example.qlkhachsan.service;
 
+import com.example.qlkhachsan.model.Employee;
 import com.example.qlkhachsan.repository.GuestRepository;
 import com.example.qlkhachsan.model.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,10 +47,36 @@ public class ManageGuestService {
 
     public Guest showEditGuest(Long id){
         Optional<Guest> optionalGuest = guestRepository.findById(id);
+        if (optionalGuest.isPresent()){
+            Guest guest = optionalGuest.get();
+            String birthDateStr = guest.getBirth();
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                //parse de doi String thanh Date
+                //format de doi Date thanh String
+                Date birthDate = inputDateFormat.parse(birthDateStr);
+                String formattedBirthDate = outputDateFormat.format(birthDate);
+                guest.setBirth(formattedBirthDate);
+            }catch (ParseException e){
+                throw new RuntimeException(e);
+            }
+        }
         return optionalGuest.orElse(null);
     }
 
     public void editGuest(Guest guest){
+        String inputDateStr = guest.getBirth();
+        String outputDateFormat = "dd/MM/yyyy";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputDateFormatObj = new SimpleDateFormat(outputDateFormat);
+        try {
+            Date inputDate = inputDateFormat.parse(inputDateStr);
+            String outputDateStr = outputDateFormatObj.format(inputDate);
+            guest.setBirth(outputDateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         guestRepository.save(guest);
     }
 

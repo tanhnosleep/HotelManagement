@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -37,7 +40,19 @@ public class GuestService {
         String pass = appUser.getEncrytedPassword();
         appUser.setEncrytedPassword(BCrypt.hashpw(pass, BCrypt.gensalt(12)));
 
+        String inputDateStr = guest.getBirth();
+        String outputDateFormat = "dd/MM/yyyy";
+        SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputDateFormatObj = new SimpleDateFormat(outputDateFormat);
+        try {
+            Date inputDate = inputDateFormat.parse(inputDateStr);
+            String outputDateStr = outputDateFormatObj.format(inputDate);
+            guest.setBirth(outputDateStr);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
         guestRepository.save(guest);
+
         userRepository.save(appUser);
         AppRole appRole = new AppRole();
         Optional<AppRole> optionalAppRole = roleRepository.findById(2L);

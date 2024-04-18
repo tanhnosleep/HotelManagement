@@ -3,7 +3,7 @@ package com.example.qlkhachsan.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "app_role", //
+@Table(name = "app_role",
         uniqueConstraints = { @UniqueConstraint(name = "APP_ROLE_UK", columnNames = "role_name") })
 public class AppRole {
 

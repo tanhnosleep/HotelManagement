@@ -32,8 +32,6 @@
                                 <img th:src="@{/images/chamber.png}" alt="Room">
                                 <div class="number" th:utext="${Room.room_id}"></div>
                                 <div class="price">
-                                    <!--                                <span style="font-size: 15px; color: red">đ </span>-->
-                                    <!--                                <span th:utext="${Room.priceDay}"></span>-->
                                     <span th:text="${Room.type}"></span>
                                     <span> - </span>
                                     <span th:utext="${@roomService.formatPrice(Room.priceDay)}"></span>

@@ -20,7 +20,6 @@
         <div style="padding-left: 50px">
             <h1>Thông tin Phòng</h1><br/>
             <input th:value="@{'Mã phòng:  ' + ${Room.room_id}}" style="width: 50%;font-size: large"  readonly > <br/>
-<!--            <input th:value="@{'Giá:  ' + ${Room.priceDay}+'đ\ngày'}" style="width: 50%;font-size: large"  readonly > <br/>-->
             <input th:value="@{'Giá:  ' + ${@roomService.formatPrice(Room.priceDay)}+'\ngày'}" style="width: 50%;font-size: large"  readonly > <br/>
             <input th:value="@{'Loại:  ' + ${Room.type}}" style="width: 50%;font-size: large"  readonly > <br/>
         </div>

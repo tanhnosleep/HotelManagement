@@ -1,6 +1,5 @@
 package com.example.qlkhachsan.controller;
 
-
 import com.example.qlkhachsan.model.Room;
 import com.example.qlkhachsan.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,9 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/quanlyphong")
-//@AllArgsConstructor
+
 
 public class RoomController {
-//    @Autowired
-//    private RoomRepository repo;
     @Autowired
     private final RoomService roomService;
 
@@ -25,14 +22,6 @@ public class RoomController {
         this.roomService=roomService;
     }
 
-//    @GetMapping
-//    public String showListRoom(Model model, Principal principal) {
-//        String message = principal.getName() ;
-//        model.addAttribute("message1", message);
-//        List<Room> lr = (List<Room>) repo.findAll();
-//        model.addAttribute("Rooms",lr);
-//        return "quanlyphong";
-//    }
     @GetMapping
     public String showListRoom(Model model, Principal principal){
         String message = principal.getName();
@@ -42,24 +31,6 @@ public class RoomController {
         return "quanlyphong";
     }
 
-//    @GetMapping("/search")
-//    public String searchRoom(@Param("keyword") String keyword,Model model,Principal principal) {
-//        String message = principal.getName() ;
-//        model.addAttribute("message1", message);
-//        keyword = keyword.trim();
-//        List<Room> lr = repo.findAll();
-//        List<Room> result  = new ArrayList<Room>();
-//        for (Room r : lr) {
-//            if(r.getRoom_id().toString().contains(keyword) ||
-//                    r.getType().toLowerCase().contains(keyword.toLowerCase()) ||
-//                    r.getIsEmpty().toLowerCase().contains(keyword.toLowerCase())||
-//                    r.getPriceDay().toString().contains(keyword)) {
-//                result.add(r);
-//            }
-//        }
-//        model.addAttribute("Rooms",result);
-//        return "quanlyphong";
-//    }
     @GetMapping("/search")
     public String searchRoom(@RequestParam("keyword") String keyword, Model model, Principal principal){
         String message = principal.getName();
@@ -77,29 +48,12 @@ public class RoomController {
         return "themphong";
     }
 
-//    @PostMapping("/add")
-//    public  String addRoom(Room room) {
-//        repo.save(room);
-//        return "redirect:/quanlyphong";
-//    }
     @PostMapping("/add")
     public String addRoom(Room room){
         roomService.addRoom(room);
         return "redirect:/quanlyphong";
     }
 
-//    @GetMapping("/edit/{id}")
-//    public  String showEditRoom(@PathVariable(name = "id") Long id, Model model, Principal principal) {
-//        String message = principal.getName() ;
-//        model.addAttribute("message1", message);
-//        Room room = new Room();
-//        Optional<Room> optRoom = repo.findById(id);
-//        if(optRoom.isPresent()){
-//            room = optRoom.get();
-//        }
-//        model.addAttribute("Room", room );
-//        return "suaphong";
-//    }
     @GetMapping("/edit/{id}")
     public String showEditRoom(@PathVariable(name = "id") Long id, Model model, Principal principal){
         String message = principal.getName();
@@ -108,35 +62,12 @@ public class RoomController {
         return "suaphong";
     }
 
-//    @PostMapping("/edit/{id}")
-//    public  String editRoom(@PathVariable(name = "id") Long id,Room room) {
-//        Optional<Room> optRoom = repo.findById(id);
-//        if(optRoom.isPresent()){
-//            Room roomExist = optRoom.get();
-//            roomExist.setType(room.getType());
-//            roomExist.setPriceDay(room.getPriceDay());
-//            roomExist.setIsEmpty(room.getIsEmpty());
-//            repo.save(roomExist);
-//        }
-//        return "redirect:/quanlyphong";
-//    }
     @PostMapping("/edit/{id}")
     public String editRoom(Room room){
         roomService.editRoom(room);
         return "redirect:/quanlyphong";
     }
 
-//    @GetMapping("/delete/{id}")
-//    public  String deleteRoom(Model model,@PathVariable(name = "id") Long id) {
-//        try{
-//            repo.deleteById(id);
-//            return "redirect:/quanlyphong";
-//        }catch (Exception e){
-//            String message = "Phòng đang được sử dụng" ;
-//            model.addAttribute("message", message);
-//            return "403Page";
-//        }
-//    }
     @GetMapping("/delete/{id}")
     public String deleteRoom(@PathVariable(name = "id") Long id, Model model){
         try {

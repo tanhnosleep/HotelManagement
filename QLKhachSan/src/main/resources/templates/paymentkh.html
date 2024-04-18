@@ -21,16 +21,15 @@
 
 
     <label>Số Tiền phải trả</label>
-<!--    <input type="text" th:value="${payment}" readonly>-->
     <input type="text" th:value="${@roomService.formatPrice(payment)}" readonly>
     <label>Nhập số thẻ thanh toán </label>
-    <input type="text" >
+    <input type="text" required>
 
     <br/>
     <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">
-      <a  th:href="@{'/checkout/add/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}" style="color: white;font-size: large" >  Thanh toán </a>
+      <a  th:href="@{'/checkout/add/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"
+          style="color: white;font-size: large" >  Thanh toán </a>
     </button>
-
 
 
   </div>
