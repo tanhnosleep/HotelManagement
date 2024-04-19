@@ -18,18 +18,18 @@
     <div th:replace="~{/home :: fragmentNavLeft}"></div>
 
     <div class="content">
+        <form method="post" th:object="${Rental}" style="width: 80%; margin: 15%" action="trathanhcongadmin.html">
+            <label>Số Tiền phải trả</label>
+            <input type="text" th:value="${@roomService.formatPrice(Rental.payment)}" readonly>
+            <label>Nhập số thẻ thanh toán </label>
+            <input type="text" required>
 
-
-        <label>Số Tiền phải trả</label>
-        <input type="text" th:value="${@roomService.formatPrice(payment)}" readonly>
-        <label>Nhập số thẻ thanh toán </label>
-        <input type="text" required>
-
-        <br/>
-        <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">
-            <a  th:href="@{'/quanlythue/pay/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"
-                style="color: white;font-size: large" >  Thanh toán </a>
-        </button>
+            <br/>
+            <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">
+                <a  th:href="@{'/quanlythue/pay/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"
+                    style="color: white;font-size: large" >  Thanh toán </a>
+            </button>
+        </form>
 
 
     </div>

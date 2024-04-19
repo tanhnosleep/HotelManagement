@@ -31,6 +31,7 @@
                 <th>Thời Gian Check out</th>
                 <th>Mã Phòng</th>
                 <th>Mã Khách Hàng</th>
+                <th>Số tiền thanh toán</th>
             </tr>
             <tr th:each="Rental: ${Rentals}">
                 <td th:text="${Rental.rentalId}"></td>
@@ -38,6 +39,8 @@
                 <td th:text="${@rentalService.formatDate(Rental.getCheckOutDate)}"></td>
                 <td th:text="${Rental.room.room_id}"></td>
                 <td th:text="${Rental.guest.guestId}"></td>
+<!--                <td th:text="${Rental.payment}"></td>-->
+                <td th:if="${Rental.payment != null}" th:text="${@rentalService.formatPayment(Rental.payment)}"></td>
                 <td th:if="${Rental.checkOutDate==null}">
                     <button class="btn btn-success aBtn" type="button"><a
                             style="text-decoration: none;color: white"

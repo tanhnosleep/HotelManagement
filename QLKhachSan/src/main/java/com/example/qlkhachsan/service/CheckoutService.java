@@ -93,14 +93,16 @@ public class CheckoutService {
         List<Rental> lrent = rentalRepository.findByGuestIDandRoomID(ud,id);
         rental = lrent.get(lrent.size()-1);
         rental.setCheckOutDate(new Date());
-        rentalRepository.save(rental);
+
         room.setIsEmpty("Trống");
         roomRepository.save(room);
+
         Long getDiff = rental.getCheckOutDate().getTime()-rental.getCheckInDate().getTime();
         Long getDaysDiff = TimeUnit.MILLISECONDS.toSeconds(getDiff);
-        Double payment = (Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay());
+        rental.setPayment((Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay()));
+        rentalRepository.save(rental);
+
         model.addAttribute("Rental",rental);
-        model.addAttribute("payment",payment);
     }
 
     public void showResult(Long id, Long ud, Model model){

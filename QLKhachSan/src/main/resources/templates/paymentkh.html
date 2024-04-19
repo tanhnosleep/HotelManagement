@@ -19,17 +19,29 @@
 
   <div class="content">
 
+    <form method="GET" th:object="${Rental}" style="width: 80%; margin: 15%">
+      <label>Số Tiền phải trả</label>
+      <input type="text" th:value="${@roomService.formatPrice(Rental.payment)}" readonly>
+      <label>Nhập số thẻ thanh toán </label>
+      <input type="text" required>
 
-    <label>Số Tiền phải trả</label>
-    <input type="text" th:value="${@roomService.formatPrice(payment)}" readonly>
-    <label>Nhập số thẻ thanh toán </label>
-    <input type="text" required>
+      <br/>
+      <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">
+        <a  th:href="@{'/checkout/add/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"
+            style="color: white;font-size: large" >  Thanh toán </a>
+      </button>
+    </form>
 
-    <br/>
-    <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">
-      <a  th:href="@{'/checkout/add/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"
-          style="color: white;font-size: large" >  Thanh toán </a>
-    </button>
+<!--    <label>Số Tiền phải trả</label>-->
+<!--    <input type="text" th:value="${@roomService.formatPrice(payment)}" readonly>-->
+<!--    <label>Nhập số thẻ thanh toán </label>-->
+<!--    <input type="text" required>-->
+
+<!--    <br/>-->
+<!--    <button type="button" class="btn btn-success aBtn" style="margin-left: 40%">-->
+<!--      <a  th:href="@{'/checkout/add/' + ${Rental.room.room_id}+'/'+${Rental.guest.guestId}+'/payment'}"-->
+<!--          style="color: white;font-size: large" >  Thanh toán </a>-->
+<!--    </button>-->
 
 
   </div>

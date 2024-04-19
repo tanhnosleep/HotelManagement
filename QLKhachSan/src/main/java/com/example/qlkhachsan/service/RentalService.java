@@ -9,11 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -36,6 +35,17 @@ public class RentalService {
         return dateFormat.format(date);
     }
 
+    public String formatPayment(double payment){
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.getDefault());
+        symbols.setDecimalSeparator(',');
+        symbols.setGroupingSeparator('.');
+        DecimalFormat formatter = new DecimalFormat("#,##0",symbols);
+        if(Double.isNaN(payment)){
+            return "";
+        }
+        return formatter.format(payment)+ " VNĐ";
+    }
+
     public List<Rental> showListRental(){
         return rentalRepository.findAll();
     }
@@ -56,7 +66,8 @@ public class RentalService {
         return rentalRepository.findByGuestIDandRoomID(ud,id);
     }
 
-    public void showEditRental(Long id, Long ud, Model model, Principal principal){
+
+    public void showPayment(Long id, Long ud, Model model, Principal principal){
         Room room = new Room();
         Optional<Room> optRoom =roomRepository.findById(id);
         if(optRoom.isPresent()){
@@ -69,13 +80,12 @@ public class RentalService {
         rental.setCheckOutDate(new Date());
         room.setIsEmpty("Trống");
         roomRepository.save(room);
-//        renrepo.save(rental);
+
         Long getDiff = rental.getCheckOutDate().getTime()-rental.getCheckInDate().getTime();
         Long getDaysDiff = TimeUnit.MILLISECONDS.toSeconds(getDiff);
-        Double payment = (Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay());
+        rental.setPayment((Math.ceil(Double.parseDouble(getDaysDiff.toString())/86400))*(room.getPriceDay()));
         rentalRepository.save(rental);
         model.addAttribute("Rental",rental);
-        model.addAttribute("payment",payment);
     }
 
     public void showResult(Long id, Long ud, Model model){
@@ -84,6 +94,8 @@ public class RentalService {
         if(optRoom.isPresent()){
             room=optRoom.get();
         }
+        room.setIsEmpty("Trống");
+        roomRepository.save(room);
         Rental rental = new Rental();
         List<Rental> lrent = rentalRepository.findByGuestIDandRoomID(ud,id);
         rental = lrent.get(lrent.size()-1);

@@ -6,10 +6,7 @@ import com.example.qlkhachsan.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.List;
@@ -47,10 +44,10 @@ public class RentalController {
     }
 
     @GetMapping("/pay/{id}/{ud}")
-    public String showEditRoom(@PathVariable(name = "id") Long id,
+    public String showPayment(@PathVariable(name = "id") Long id,
                                @PathVariable(name = "ud") Long ud,
                                Model model,Principal principal){
-        rentalService.showEditRental(id,ud,model,principal);
+        rentalService.showPayment(id,ud,model,principal);
         return "payment";
     }
 

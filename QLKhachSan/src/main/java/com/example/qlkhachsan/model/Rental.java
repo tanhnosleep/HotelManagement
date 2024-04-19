@@ -32,6 +32,9 @@ public class Rental implements Serializable{
     @Column(name = "check_out_date")
     private Date checkOutDate;
 
+    @Column(name="payment")
+    private Double payment;
+
 
     @ManyToOne(targetEntity = Guest.class)
     private Guest guest;
