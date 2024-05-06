@@ -35,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Autowired
-    //Phương thức cấu hình việc xác thực người dùng và mật khẩu
+    //Phương thức cấu hình việc xác thực người dùng và mật khẩu (lay thong tin nguoi dung va ma hoa mat khau)
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceImpl).passwordEncoder(passwordEncoder());
     }
@@ -44,8 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // cấu hình quy tắc bảo mật cho các URL trong ứng dụng
     protected void configure(HttpSecurity http) throws Exception {
 
+        http.csrf().disable(); //tắt bảo vệ CSRF trong Spring Security
+        // (một loại tấn công khi kẻ tấn công sử dụng các request giả mạo
+        // từ một trang web khác để thực hiện các hành động bất hợp pháp trên trang web đích)
+
         //URL được truy cập công cộng
-        http.csrf().disable();
         http.authorizeRequests().antMatchers("/", "/logout").permitAll()
                 .and()
                 .formLogin().usernameParameter("username").passwordParameter("pass")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<html lang="vi"  xmlns:th="http://www.thymeleaf.org" >
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -55,6 +55,9 @@
       </div>
       <div   class="nav-item pl-3c4">
         <a th:href="@{/quanlynhanvien}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL Nhân Viên</a>
+      </div>
+      <div   class="nav-item pl-3c4">
+        <a th:href="@{/thongkenam}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">Thống kê năm</a>
       </div>
       <div>
         <div id="btn-logout" class="logout" th:if="${message1 != null}">
