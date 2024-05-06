@@ -11,5 +11,5 @@ import java.math.BigDecimal;
 @Setter
 public class RevenueStatistics {
     private int month;
-    private BigDecimal revenue;
+    private Double revenue;
 }

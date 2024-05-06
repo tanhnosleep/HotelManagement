@@ -21,38 +21,48 @@ public class StatisticsService {
 
     public List<RevenueStatistics> getRevenueByMonth(String year){
         List<RevenueStatistics> revenueStatisticsList = new ArrayList<>();
-        String sql="SELECT MONTH(check_out_date) AS thang," +
-                   "SUM(payment) AS tong_doanh_thu " +
+        String sql="SELECT MONTH(check_out_date) AS month," +
+                   "SUM(payment) AS revenue " +
                    "FROM rental " +
                    "WHERE YEAR(check_out_date) = '"+year+"'" +
                    "GROUP BY MONTH(check_out_date)" +
-                   "ORDER BY thang";
+                   "ORDER BY month";
         Query query = entityManager.createNativeQuery(sql);
         List<Object[]> results = query.getResultList();
         for (Object[] result : results){
             RevenueStatistics revenueStatistics = new RevenueStatistics();
             revenueStatistics.setMonth(Integer.parseInt(result[0].toString()));
-            revenueStatistics.setRevenue((BigDecimal) result[1]);
+            revenueStatistics.setRevenue((Double) result[1]);
             revenueStatisticsList.add(revenueStatistics);
         }
         return revenueStatisticsList;
     }
 
-    public List<RevenueStatistics> getRevenueByYear(){
-        List<RevenueStatistics> revenueStatisticsList = new ArrayList<>();
-        String sql="SELECT YEAR(check_out_date) AS nam," +
-                "SUM(payment) AS tong_doanh_thu " +
+    public List<String> Year(){
+        List<String> year;
+        String sql = "select distinct year(check_out_date) as year\n" +
                 "FROM rental " +
-                "GROUP BY YEAR(check_out_date)" +
-                "ORDER BY nam";
+                "ORDER BY year ASC";
         Query query = entityManager.createNativeQuery(sql);
-        List<Object[]> results = query.getResultList();
-        for (Object[] result : results){
-            RevenueStatistics revenueStatistics = new RevenueStatistics();
-            revenueStatistics.setMonth(Integer.parseInt(result[0].toString()));
-            revenueStatistics.setRevenue((BigDecimal) result[1]);
-            revenueStatisticsList.add(revenueStatistics);
-        }
-        return revenueStatisticsList;
+        year = query.getResultList();
+        return year;
     }
+
+//    public List<RevenueStatistics> getRevenueByYear(){
+//        List<RevenueStatistics> revenueStatisticsList = new ArrayList<>();
+//        String sql="SELECT YEAR(check_out_date) AS nam," +
+//                "SUM(payment) AS tong_doanh_thu " +
+//                "FROM rental " +
+//                "GROUP BY YEAR(check_out_date)" +
+//                "ORDER BY nam";
+//        Query query = entityManager.createNativeQuery(sql);
+//        List<Object[]> results = query.getResultList();
+//        for (Object[] result : results){
+//            RevenueStatistics revenueStatistics = new RevenueStatistics();
+//            revenueStatistics.setMonth(Integer.parseInt(result[0].toString()));
+//            revenueStatistics.setRevenue((BigDecimal) result[1]);
+//            revenueStatisticsList.add(revenueStatistics);
+//        }
+//        return revenueStatisticsList;
+//    }
 }

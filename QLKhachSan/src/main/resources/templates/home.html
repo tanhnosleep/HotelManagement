@@ -57,7 +57,10 @@
         <a th:href="@{/quanlynhanvien}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">QL Nhân Viên</a>
       </div>
       <div   class="nav-item pl-3c4">
-        <a th:href="@{/thongkenam}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">Thống kê năm</a>
+        <a th:href="@{/thongkethang?year=}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">Thống kê theo tháng</a>
+      </div>
+      <div   class="nav-item pl-3c4">
+        <a th:href="@{/thongkenam}" style="text-decoration: none;color: white" th:if="${message1 == 'admin'}">Thống kê theo năm</a>
       </div>
       <div>
         <div id="btn-logout" class="logout" th:if="${message1 != null}">
