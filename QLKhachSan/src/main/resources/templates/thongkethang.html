@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
@@ -28,9 +28,6 @@
                     </select>
                 </div>
             </div>
-            <!--            <div>-->
-            <!--                <a href="" class="btn btn-outline-primary mb-1" role="button">Export excel</a>-->
-            <!--            </div>-->
         </div>
         <div style="padding: 10px 10px">
             <label style="font-size: large; font-weight: 600; color: #0d6efd" th:text="'Doanh thu trong năm ' + ${disYear}"></label>
@@ -44,14 +41,14 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
-    var dataSales = [(${dataSales})];
+    var revenueByMonth = [(${revenueByMonth})];
     var myChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
             datasets: [{
                 label: 'Doanh thu (VNĐ)',
-                data: dataSales,
+                data: revenueByMonth,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.5)',
                     'rgba(54, 162, 235, 0.5)',

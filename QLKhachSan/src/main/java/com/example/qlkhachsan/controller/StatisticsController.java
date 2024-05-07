@@ -8,11 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.math.BigDecimal;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -29,30 +28,39 @@ public class StatisticsController {
         String message = principal.getName();
         model.addAttribute("message1",message);
         List<RevenueStatistics> revenueStatisticsList = statisticsService.getRevenueByMonth(year);
-        model.addAttribute("RevenueMonth", revenueStatisticsList);
         model.addAttribute("disYear", year);
         List<String> yearList = statisticsService.Year();
         model.addAttribute("yearList", yearList);
-        Double[] dataSales = new Double[12];
+        Double[] revenueMonth = new Double[12];
         for (int i = 0; i < 12; i++) {
-            dataSales[i] = Double.valueOf(0);
+            revenueMonth[i] = Double.valueOf(0);
         }
-        for (RevenueStatistics sales : revenueStatisticsList) {
-            dataSales[sales.getMonth() - 1] = sales.getRevenue();
+        for (RevenueStatistics revenueStatistics : revenueStatisticsList) {
+            revenueMonth[revenueStatistics.getMonth() - 1] = revenueStatistics.getRevenue();
         }
         ObjectMapper mapper = new ObjectMapper();
-        String JsOn = mapper.writeValueAsString(dataSales);
+        String JsOn = mapper.writeValueAsString(revenueMonth);
         // truyền dữ liệu vào model attribute "data"
-        model.addAttribute("dataSales", JsOn);
+        model.addAttribute("revenueByMonth", JsOn);
         return "thongkethang";
     }
 
-//    @GetMapping("/thongkenam")
-//    public String getRevenueByYear(Model model, Principal principal){
-//        String message = principal.getName();
-//        model.addAttribute("message1",message);
-//        List<RevenueStatistics> revenueStatisticsList = statisticsService.getRevenueByYear();
-//        model.addAttribute("RevenueYear",revenueStatisticsList);
-//        return "thongkenam";
-//    }
+    @GetMapping("/thongkenam")
+    public String getRevenueByYear(Model model, Principal principal) throws JsonProcessingException {
+        String message = principal.getName();
+        model.addAttribute("message1",message);
+        List<RevenueStatistics> revenueStatisticsList = statisticsService.getRevenueByYear();
+        List<Double> revenueYear = new ArrayList<>();
+        List<Integer> year = new ArrayList<>();
+        for (RevenueStatistics revenueStatistics : revenueStatisticsList){
+            year.add(revenueStatistics.getMonth());
+            revenueYear.add(revenueStatistics.getRevenue());
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String revenueJSON = mapper.writeValueAsString(revenueYear);
+        String yearJSON = mapper.writeValueAsString(year);
+        model.addAttribute("years", yearJSON);
+        model.addAttribute("revenueByYear", revenueJSON);
+        return "thongkenam";
+    }
 }
