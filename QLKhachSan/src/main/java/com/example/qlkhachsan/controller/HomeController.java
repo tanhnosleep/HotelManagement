@@ -15,7 +15,7 @@ import java.security.Principal;
 public class HomeController {
 
     @GetMapping(value = {"/", "home"})
-    public String homePage(Model model, Principal principal) {
+    public String homePage(Model model, Principal principal) { //Principle kiem tra xem nguoi dung co dang nhap hay chua
         if (principal == null) {
             String message = null;
             model.addAttribute("message1", message);
